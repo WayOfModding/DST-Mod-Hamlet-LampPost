@@ -5,6 +5,7 @@ Assets = {
   Asset("IMAGE", "images/images.tex"),
 }
 
+--
 local RECIPETABS = GLOBAL.RECIPETABS
 local TECH = GLOBAL.TECH
 
@@ -18,3 +19,8 @@ local recipe_city_lamp = Recipe("city_lamp", {
   "city_lamp_placer")
 
 recipe_city_lamp.atlas = "images/images.xml"
+
+--
+local STRINGS = GLOBAL.STRINGS
+STRINGS.NAMES.CITY_LAMP = "Lamp Post"
+STRINGS.RECIPE_DESC.CITY_LAMP = "I can't believe I can make this."
