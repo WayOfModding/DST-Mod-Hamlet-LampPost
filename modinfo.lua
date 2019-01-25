@@ -1,5 +1,5 @@
 --The name of the mod displayed in the 'mods' screen.
-name = "[Hamlet]Lamp Post"
+name = "[Hamlet] Lamp Post"
 
 --A description of the mod.
 description = "Lamp Post from Hamlet DLC of Don't Starve."
@@ -24,8 +24,8 @@ client_only_mod = false
 --This lets people search for servers with this mod by these tags
 server_filter_tags = {"hamlet"}
 
-icon_atlas = "mod.xml"
-icon = "mod.tex"
+icon_atlas = "modicon.xml"
+icon = "modicon.tex"
 
 forumthread = ""
 
