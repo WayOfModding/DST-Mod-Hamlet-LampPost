@@ -1,13 +1,14 @@
-local require = GLOBAL.require
+local _G = GLOBAL
+local require = _G.require
 
 Assets = {
-  Asset("ATLAS", "images/images.xml"),
-  Asset("IMAGE", "images/images.tex"),
+  Asset("ATLAS", "images/lamppost.xml"),
+  Asset("IMAGE", "images/lamppost.tex"),
 }
 
 --
-local RECIPETABS = GLOBAL.RECIPETABS
-local TECH = GLOBAL.TECH
+local RECIPETABS = _G.RECIPETABS
+local TECH = _G.TECH
 
 local recipe_city_lamp = Recipe("city_lamp", {
     Ingredient("goldnugget", 1),
@@ -18,9 +19,9 @@ local recipe_city_lamp = Recipe("city_lamp", {
   TECH.SCIENCE_TWO,
   "city_lamp_placer")
 
-recipe_city_lamp.atlas = "images/images.xml"
+recipe_city_lamp.atlas = "images/lamppost.xml"
 
 --
-local STRINGS = GLOBAL.STRINGS
+local STRINGS = _G.STRINGS
 STRINGS.NAMES.CITY_LAMP = "Lamp Post"
 STRINGS.RECIPE_DESC.CITY_LAMP = "I can't believe I can make this."
