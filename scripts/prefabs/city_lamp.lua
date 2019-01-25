@@ -12,6 +12,7 @@ local LAMP_DIST = 16
 local LAMP_DIST_SQ = LAMP_DIST * LAMP_DIST
 
 local function UpdateAudio(inst)
+  --[[
   local player = GetPlayer()
 
   local instPosition = Vector3(inst.Transform:GetWorldPosition())
@@ -23,6 +24,7 @@ local function UpdateAudio(inst)
   elseif not lampIsNearby and inst.SoundEmitter:PlayingSound("onsound") then
     inst.SoundEmitter:KillSound("onsound")
   end
+  --]]
 end
 
 local function GetStatus(inst)
@@ -57,7 +59,8 @@ local function fadeout(inst)
 end
 
 local function updatelight(inst)
-  if GetClock():IsDusk() or GetClock():IsNight() then
+  local _worldstate = TheWorld.state
+  if not _worldstate.isday then
     if not inst.lighton then
       inst:DoTaskInTime(math.random()*2, function() fadein(inst) end)
     else
@@ -84,7 +87,7 @@ end
 
 
 local function setobstical(inst)
-  local ground = GetWorld()
+  local ground = TheWorld
   if ground then
     local pt = Point(inst.Transform:GetWorldPosition())
     ground.Pathfinder:AddWall(pt.x, pt.y, pt.z)
@@ -92,7 +95,7 @@ local function setobstical(inst)
 end
 
 local function clearobstacle(inst)
-  local ground = GetWorld()
+  local ground = TheWorld
   if ground then
     local pt = Point(inst.Transform:GetWorldPosition())
     ground.Pathfinder:RemoveWall(pt.x, pt.y, pt.z)
@@ -102,11 +105,9 @@ end
 local function onhammered(inst, worker)
   inst.SoundEmitter:KillSound("onsound")
 
-  if not inst.components.fixable then
-    inst.components.lootdropper:DropLoot()
-  end
+  local fx = SpawnPrefab("collapse_small")
+  fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
 
-  SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
   inst.SoundEmitter:PlaySound("dontstarve/common/destroy_metal")
 
   inst:Remove()
@@ -131,13 +132,25 @@ local function OnEntitySleep(inst)
   end
 end
 
+local function exists(variable_name)
+  for k, _ in pairs(_G) do
+    if k == variable_name then
+      return true
+    end
+  end
+end
+
 local function OnEntityWake(inst)
   if inst.audiotask then
     inst.audiotask:Cancel()
   end
   inst.audiotask = inst:DoPeriodicTask(1.0, function() UpdateAudio(inst) end, math.random())
 
-  if GetAporkalypse():GetFiestaActive() then
+  local aporkalypse = nil
+  if exists("GetAporkalypse") then
+    aporkalypse = GetAporkalypse()
+  end
+  if aporkalypse and aporkalypse:GetFiestaActive() then
     if inst.build == "lamp_post2_city_build" then
       inst.build = "lamp_post2_yotp_build"
       inst.AnimState:SetBuild(inst.build)
@@ -155,19 +168,17 @@ local function fn(Sim)
   inst:AddTag("CITY_LAMP")
   inst.entity:AddTransform()
   inst.entity:AddAnimState()
-
-  inst.entity:AddPhysics()
+  inst.entity:AddNetwork()
 
   MakeObstaclePhysics(inst, 0.25)
 
   local light = inst.entity:AddLight()
   inst.Light:SetIntensity(INTENSITY)
   inst.Light:SetColour(197/255, 197/255, 10/255)
-  inst.Light:SetFalloff( 0.9 )
-  inst.Light:SetRadius( 5 )
+  inst.Light:SetFalloff(0.9)
+  inst.Light:SetRadius(5)
   inst.Light:Enable(false)
-
-  --inst.AnimState:SetBloomEffectHandle( "shaders/anim.ksh" )
+  inst.Light:EnableClientModulation(true)
 
   inst.build = "lamp_post2_city_build"
   inst.AnimState:SetBank("lamp_post")
@@ -177,17 +188,21 @@ local function fn(Sim)
   inst.AnimState:Hide("FIRE")
   inst.AnimState:Hide("GLOW")
 
-  inst.AnimState:SetRayTestOnBB(true);
+  inst.entity:SetPristine()
 
-  inst:AddTag("lightsource")
+  inst:AddTag("_citylamp")
 
-  inst:AddTag("city_hammerable")
+  if not TheWorld.ismastersim then
+    --inst:ListenForEvent("fadedirty", OnFadeDirty)
+    return inst
+  end
+
+  inst:RemoveTag("_citylamp")
+
   inst:AddComponent("inspectable")
-  inst.components.inspectable.getstatus = GetStatus
-
+  --inst.components.inspectable.getstatus = GetStatus
 
   inst:AddComponent("lootdropper")
-
   inst:AddComponent("workable")
   inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
   inst.components.workable:SetWorkLeft(4)
@@ -196,13 +211,9 @@ local function fn(Sim)
 
   inst:AddComponent("fader")
 
-  inst:ListenForEvent( "daytime", function()
-    inst:DoTaskInTime(1/30, function() updatelight(inst) end)
-  end, GetWorld())
-
-  inst:ListenForEvent( "dusktime", function()
-    inst:DoTaskInTime(1/30, function() updatelight(inst) end)
-  end, GetWorld())
+  local _updatelight = function() updatelight(inst) end
+  inst:WatchWorldState("iscavedusk", _updatelight)
+  inst:WatchWorldState("iscaveday", _updatelight)
 
   inst:ListenForEvent("onbuilt", onbuilt)
 
@@ -225,13 +236,9 @@ local function fn(Sim)
     end
   end
 
-  inst.audiotask = inst:DoPeriodicTask(1.0, function() UpdateAudio(inst) end, math.random())
-
-  inst:AddComponent("fixable")
-  inst.components.fixable:AddRecinstructionStageData("rubble","lamp_post","lamp_post2_city_build")
+  --inst.audiotask = inst:DoPeriodicTask(1.0, function() UpdateAudio(inst) end, math.random())
 
   inst.setobstical = setobstical
-  inst:AddComponent("gridnudger")
 
   inst.OnEntitySleep = OnEntitySleep
   inst.OnEntityWake = OnEntityWake
