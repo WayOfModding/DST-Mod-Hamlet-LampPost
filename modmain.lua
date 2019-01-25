@@ -6,6 +6,11 @@ Assets = {
   Asset("IMAGE", "images/lamppost.tex"),
 }
 
+PrefabFiles =
+{
+    "city_lamp",
+}
+
 --
 local RECIPETABS = _G.RECIPETABS
 local TECH = _G.TECH
