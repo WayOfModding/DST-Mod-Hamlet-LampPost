@@ -9,7 +9,7 @@ local RECIPETABS = GLOBAL.RECIPETABS
 local TECH = GLOBAL.TECH
 
 local recipe_city_lamp = Recipe("city_lamp", {
-    Ingredient("gold", 1),
+    Ingredient("goldnugget", 1),
     Ingredient("transistor", 1),
     Ingredient("lantern",1)
   },
