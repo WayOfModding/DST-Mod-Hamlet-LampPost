@@ -105,6 +105,8 @@ end
 local function onhammered(inst, worker)
   inst.SoundEmitter:KillSound("onsound")
 
+  inst.components.lootdropper:DropLoot()
+
   local fx = SpawnPrefab("collapse_small")
   fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
 
