@@ -15,11 +15,28 @@ PrefabFiles =
 local RECIPETABS = _G.RECIPETABS
 local TECH = _G.TECH
 
-local recipe_city_lamp = Recipe("city_lamp", {
+local ingredients = {
+  [0] = { -- easy
     Ingredient("goldnugget", 1),
     Ingredient("transistor", 1),
-    Ingredient("lantern",1)
+    Ingredient("lantern", 1)
   },
+  [1] = { -- normal
+    Ingredient("marble", 1),
+    Ingredient("transistor", 4),
+    Ingredient("lantern", 1)
+  },
+  [2] = { -- hard
+    Ingredient("deerclops_eyeball", 1),
+    Ingredient("transistor", 16),
+    Ingredient("lantern", 1)
+  },
+}
+
+local user_choice = GetModConfigData("DIFFICULTY") or 0
+
+local recipe_city_lamp = Recipe("city_lamp",
+  ingredients[user_choice],
   RECIPETABS.LIGHT,
   TECH.SCIENCE_TWO,
   "city_lamp_placer")

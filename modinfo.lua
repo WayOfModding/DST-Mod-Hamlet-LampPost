@@ -31,4 +31,24 @@ forumthread = ""
 
 configuration_options =
 {
+  {
+    name = "DIFFICULTY",
+    label = "This changes the RECIPE of Lamp Post.",
+    options = {
+      {
+        description = "Easy",
+        data = 0,
+        hover = "1x Gold Nugget + 1x Transistor + 1x Lantern"
+      }, {
+        description = "Normal",
+        data = 1,
+        hover = "1x Marble + 4x Transistor + 1x Lantern"
+      }, {
+        description = "Hard",
+        data = 2,
+        hover = "1x Deerclop Eyeball + 16x Transistor + 1x Lantern"
+      },
+    },
+    default = 0,
+  },
 }
