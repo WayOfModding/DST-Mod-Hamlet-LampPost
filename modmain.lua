@@ -42,7 +42,6 @@ local recipe_city_lamp = Recipe("city_lamp",
   "city_lamp_placer")
 
 recipe_city_lamp.atlas = "images/lamppost.xml"
-recipe_city_lamp.image = "lamppost.tex"
 
 --
 local STRINGS = _G.STRINGS
