@@ -8,7 +8,7 @@ description = "Lamp Post from Hamlet DLC of Don't Starve."
 author = "KaiserKatze"
 
 --A version number so you can ask people if they are running an old version of your mod.
-version = "1.0.4"
+version = "1.1.0"
 
 --This lets other players know if your mod is out of date. This typically needs to be updated every time there's a new game update.
 api_version = 10
@@ -28,27 +28,3 @@ icon_atlas = "modicon.xml"
 icon = "modicon.tex"
 
 forumthread = ""
-
-configuration_options =
-{
-  {
-    name = "DIFFICULTY",
-    label = "This changes the RECIPE of Lamp Post.",
-    options = {
-      {
-        description = "Easy",
-        data = 0,
-        hover = "1x Gold Nugget + 1x Transistor + 1x Lantern"
-      }, {
-        description = "Normal",
-        data = 1,
-        hover = "1x Marble + 4x Transistor + 1x Lantern"
-      }, {
-        description = "Hard",
-        data = 2,
-        hover = "1x Deerclop Eyeball + 16x Transistor + 1x Lantern"
-      },
-    },
-    default = 0,
-  },
-}
