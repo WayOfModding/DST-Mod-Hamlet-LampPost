@@ -18,7 +18,7 @@ local TECH = _G.TECH
 
 local recipe_city_lamp = Recipe("city_lamp",
   {
-    Ingredient("alloy", 1),
+    Ingredient("alloy", 1, "images/alloy.xml"),
     Ingredient("transistor", 1),
     Ingredient("lantern", 1)
   },
