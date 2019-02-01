@@ -3,8 +3,6 @@ local require = _G.require
 
 Assets =
 {
-  Asset("ATLAS", "images/lamppost.xml"),
-  Asset("IMAGE", "images/lamppost.tex"),
 }
 
 PrefabFiles =
@@ -30,7 +28,7 @@ AddRecipe("city_lamp",
   nil,
   nil,
   nil,
-  "images/lamppost.xml"
+  "images/city_lamp.xml"
 )
 ---------------------------------------------------------------------------------
 local STRINGS = GLOBAL.STRINGS
