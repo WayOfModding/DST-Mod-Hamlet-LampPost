@@ -28,3 +28,16 @@ icon_atlas = "modicon.xml"
 icon = "modicon.tex"
 
 forumthread = ""
+
+configuration_options =
+{
+  {
+    name = "RECIPE",
+    label = "Which recipe to use",
+    options = {
+      {description = "Default", data = 0, hover = "1x Alloy + 1x Transistor + 1x Lantern"},
+      {description = "Gold", data = 1, hover = "1x Gold nugget + 1x Transistor + 1x Lantern"},
+    },
+    default = 0,
+  },
+}

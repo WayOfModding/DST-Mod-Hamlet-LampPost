@@ -1,5 +1,6 @@
 local _G = GLOBAL
 local require = _G.require
+local assert = _G.assert
 
 Assets =
 {
@@ -15,9 +16,15 @@ local Ingredient = _G.Ingredient
 local RECIPETABS = _G.RECIPETABS
 local TECH = _G.RECIPETABS
 
+local RECIPE_ID = GetModConfigData("RECIPE") or 0
+local special_ingredient = ({
+  Ingredient("alloy", 1, "images/alloy.xml"),
+  Ingredient("goldnugget", 1),
+})[RECIPE_ID]
+
 AddRecipe("city_lamp",
   {
-    Ingredient("alloy", 1, "images/alloy.xml"),
+    special_ingredient,
     Ingredient("transistor", 1),
     Ingredient("lantern", 1)
   },
@@ -30,6 +37,17 @@ AddRecipe("city_lamp",
   nil,
   "images/city_lamp.xml"
 )
+
+if RECIPE_ID == 0 then
+  AddSimPostInit(function()
+    local errmsg = [[Necessary mod is not loaded! You should subscribe the following mod:
+      https://steamcommunity.com/sharedfiles/filedetails/?id=1639620889]]
+    local world = _G.TheWorld
+    if world.ismastersim then
+      assert(SpawnPrefab("alloy") ~= nil, errmsg)
+    end
+  end)
+end
 ---------------------------------------------------------------------------------
 local STRINGS = GLOBAL.STRINGS
 -------------------------------
