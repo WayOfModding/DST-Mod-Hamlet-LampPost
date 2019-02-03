@@ -18,8 +18,8 @@ local TECH = _G.RECIPETABS
 
 local RECIPE_ID = GetModConfigData("RECIPE") or 0
 local special_ingredient = ({
-  Ingredient("alloy", 1, "images/alloy.xml"),
-  Ingredient("goldnugget", 1),
+  [0] = Ingredient("alloy", 1, "images/alloy.xml"),
+  [1] = Ingredient("goldnugget", 1),
 })[RECIPE_ID]
 
 AddRecipe("city_lamp",
@@ -44,7 +44,7 @@ if RECIPE_ID == 0 then
       https://steamcommunity.com/sharedfiles/filedetails/?id=1639620889]]
     local world = _G.TheWorld
     if world.ismastersim then
-      assert(SpawnPrefab("alloy") ~= nil, errmsg)
+      assert(_G.SpawnPrefab("alloy") ~= nil, errmsg)
     end
   end)
 end
