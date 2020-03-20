@@ -31,13 +31,4 @@ forumthread = "https://github.com/WayOfModding/DST-Mod-Hamlet-LampPost/issues"
 
 configuration_options =
 {
-  {
-    name = "RECIPE",
-    label = "Which recipe to use",
-    options = {
-      {description = "Gold", data = 0, hover = "1x Gold nugget + 1x Transistor + 1x Lantern"},
-      {description = "Alloy", data = 1, hover = "1x Alloy + 1x Transistor + 1x Lantern"},
-    },
-    default = 0,
-  },
 }

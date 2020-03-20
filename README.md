@@ -10,5 +10,5 @@ but in Don't Starve Together, you can't acquire alloy in any means,
 so I replace the alloy with gold:
 
 ```
-1x Gold + 1x Transistor + 1x Lantern = Lamp Post
+1x Gold Nugget + 1x Transistor + 1x Lantern = Lamp Post
 ```

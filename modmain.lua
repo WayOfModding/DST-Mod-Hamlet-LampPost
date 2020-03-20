@@ -16,15 +16,19 @@ local Ingredient = _G.Ingredient
 local RECIPETABS = _G.RECIPETABS
 local TECH = _G.RECIPETABS
 
-local RECIPE_ID = GetModConfigData("RECIPE") or 0
-local special_ingredient = ({
-  [0] = Ingredient("goldnugget", 1),
-  [1] = Ingredient("alloy", 1, "images/alloy.xml"),
-})[RECIPE_ID]
+local function GetSecretIngredient()
+  --local RECIPE_ID = GetModConfigData("RECIPE") or 0
+  --local special_ingredient = ({
+  --  [0] = Ingredient("goldnugget", 1),
+  --  [1] = Ingredient("alloy", 1, "images/alloy.xml"),
+  --})[RECIPE_ID]
+
+  return Ingredient("goldnugget", 1)
+end
 
 AddRecipe("city_lamp",
   {
-    special_ingredient,
+    GetSecretIngredient(),
     Ingredient("transistor", 1),
     Ingredient("lantern", 1)
   },
