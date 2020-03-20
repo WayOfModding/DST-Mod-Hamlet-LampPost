@@ -8,7 +8,7 @@ description = "Lamp Post from Hamlet DLC of Don't Starve."
 author = "KaiserKatze"
 
 --A version number so you can ask people if they are running an old version of your mod.
-version = "1.1.2"
+version = "1.1.3"
 
 --This lets other players know if your mod is out of date. This typically needs to be updated every time there's a new game update.
 api_version = 10
@@ -27,7 +27,7 @@ server_filter_tags = {"hamlet"}
 icon_atlas = "modicon.xml"
 icon = "modicon.tex"
 
-forumthread = ""
+forumthread = "https://github.com/WayOfModding/DST-Mod-Hamlet-LampPost/issues"
 
 configuration_options =
 {
@@ -35,8 +35,8 @@ configuration_options =
     name = "RECIPE",
     label = "Which recipe to use",
     options = {
-      {description = "Default", data = 0, hover = "1x Alloy + 1x Transistor + 1x Lantern"},
-      {description = "Gold", data = 1, hover = "1x Gold nugget + 1x Transistor + 1x Lantern"},
+      {description = "Gold", data = 0, hover = "1x Gold nugget + 1x Transistor + 1x Lantern"},
+      {description = "Alloy", data = 1, hover = "1x Alloy + 1x Transistor + 1x Lantern"},
     },
     default = 0,
   },

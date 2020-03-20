@@ -18,8 +18,8 @@ local TECH = _G.RECIPETABS
 
 local RECIPE_ID = GetModConfigData("RECIPE") or 0
 local special_ingredient = ({
-  [0] = Ingredient("alloy", 1, "images/alloy.xml"),
-  [1] = Ingredient("goldnugget", 1),
+  [0] = Ingredient("goldnugget", 1),
+  [1] = Ingredient("alloy", 1, "images/alloy.xml"),
 })[RECIPE_ID]
 
 AddRecipe("city_lamp",

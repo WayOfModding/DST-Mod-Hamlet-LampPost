@@ -4,6 +4,7 @@ local assets =
   Asset("ANIM", "anim/lamp_post2_city_build.zip"),
   Asset("ANIM", "anim/lamp_post2_yotp_build.zip"),
   Asset("INV_IMAGE", "city_lamp"),
+  Asset("ATLAS", "images/city_lamp.xml"),
 }
 
 local INTENSITY = 0.6
